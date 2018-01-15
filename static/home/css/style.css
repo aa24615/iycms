@@ -1,0 +1,60 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "微软雅黑";
+}
+
+*, :after, :before {
+    box-sizing: border-box;
+}
+
+a{
+	color: #009688;	
+	text-decoration: none;
+}
+a:hover{
+	color: #333333;	
+	text-decoration: none;
+}
+ul,
+li {
+	list-style: none;
+}
+h1,h2,h3,h4,h5{
+	font-weight: initial;
+}
+body{
+	background: #179898 url(../img/bj.png) repeat;
+}
+.show{
+	display: block;
+}
+
+.hide{
+	display: none;
+}
+
+@font-face {
+	font-family: 'iconfont';
+	/* project id 448084 */
+	src: url('//at.alicdn.com/t/font_448084_r5qtmj4s20ara4i.eot');
+	src: url('//at.alicdn.com/t/font_448084_r5qtmj4s20ara4i.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_448084_r5qtmj4s20ara4i.woff') format('woff'), url('//at.alicdn.com/t/font_448084_r5qtmj4s20ara4i.ttf') format('truetype'), url('//at.alicdn.com/t/font_448084_r5qtmj4s20ara4i.svg#iconfont') format('svg');
+}
+
+.iconfont {
+	font-family: "iconfont" !important;
+	font-size: 16px;
+	font-style: normal;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+.el-container {
+	margin: 80px 0;
+}
+
