@@ -1,21 +1,20 @@
 <template>
-	<div id="app">
+	<div id="app" v-loading.fullscreen.lock="!show">
 		<Header :nav="nav" :header2="header2" ></Header>
 		<router-view @SetHeader="set_header2" ></router-view>
 		<Footer></Footer>
 		<div :class="{'maskl':true,'maskl2':show}"></div>
 		<div :class="{'maskr':true,'maskr2':show}"></div>
-		<img v-show="!show" src="../static/home/img/loading.gif" id="loading" />
+		<!--<img v-show="!show" src="../static/home/img/loading.gif" id="loading" />-->
 	</div>
 </template> 
 <script>
 	export default {
-		name: 'app',
 		data() {
 			return {
 				show: false,
 				header2: false,
-				nav: [{name:"关于我",url:"/about",an:false,list:[{name:"个人资料",url:"/article"},{name:"专业技能",url:"/article"},{name:"项目经验",url:"/article"},{name:"工作经历",url:"/article"},]},{name:"实验室",url:"/experiment"},{name:"归档",url:"/archive"},{name:"博文",url:"/article"},{name:"首页",url:"/",active:true,}],
+				nav: [{name:"关于我",url:"/about",an:false,list:[{name:"个人资料",url:"/article"},{name:"专业技能",url:"/article"},{name:"项目经验",url:"/article"},{name:"工作经历",url:"/article"},]},{name:"留言",url:"/experiment"},{name:"实验室",url:"/experiment"},{name:"归档",url:"/archive"},{name:"博文",url:"/article"},{name:"首页",url:"/",active:true,}],
 			};
 		},
 		
@@ -27,7 +26,7 @@
 			setTimeout(function(){
 				console.log(self.show)
 				self.show = true;
-			},10)
+			},3000)
 		},
 		methods: {
 			set_header2:function(e){

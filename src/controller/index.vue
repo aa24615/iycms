@@ -82,7 +82,3 @@
 		
 	}
 </script>
-
-<style>
-	@import "../../static/home/css/index.css";
-</style>
