@@ -1,4 +1,5 @@
 # IYCMS 博客管理系统 后端源代码 [前端?](https://github.com/aa24615/iycms-fed)
+> 专为程序员订制的博客系统 一个全站无刷新的博客   
 > 基于 ThinkPHP5.0 + Layui2.x 开发  
 > 先睹为快->传送门 [http://blog.php127.com](http://blog.php127.com)
 
