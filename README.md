@@ -1,4 +1,4 @@
-# IYCMS 博客管理系统 后端源代码 [后端?](https://github.com/aa24615/iycms-fed)
+# IYCMS 博客管理系统 后端源代码 [前端?](https://github.com/aa24615/iycms-fed)
 > 基于 ThinkPHP5.0 + Layui2.x 开发  
 > 先睹为快->传送门 [http://blog.php127.com](http://blog.php127.com)
 
