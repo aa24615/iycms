@@ -1,0 +1,101 @@
+{extend name="public:base" /}
+{block name="style"}
+    <style>
+		.layui-table{
+			margin: 0;
+		}
+    </style>
+{/block}
+{block name="script"}
+    <script>
+    	var vue = new Vue({
+    		el : "#app",
+    		data : {
+    			list:[]
+    		},
+    		methods : {
+    			get_table:function(dir){
+    				var self = this;
+    				$.get("{:url('table')}",{dir:dir},function(e){
+    					self.list = e;
+    					setTimeout(function(){
+	    					var html = $(".table").html();
+							layer.open({
+							  type: 1,
+							  title: dir+"_列表",
+							  closeBtn: 1,
+							  area: ['600px', '500px'],
+							  shadeClose: true,
+							  skin: 'yourclass',
+							  content: html
+							});
+						},5)
+
+    				})
+    			}
+    		}
+    	})
+        layui.use('form', function () {
+            var form = layui.form, layer = layui.layer, $ = layui.jquery;
+        });
+    </script>
+{/block}
+{block name="body"}
+
+    <table class="layui-table layui-form">
+        <colgroup>
+            <col width="100">
+            <col width="200">
+            <col width="200">
+            <col width="200">
+            <col width="200">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>备份名称</th>
+                <th>文件数量</th>
+                <th>大小</th>
+                <th>备份时间</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {volist name="list" id="vo"}
+                <tr class="id{$vo.name}">
+                    <td>{$vo.name}  </td>
+                    <td>{$vo.name|$backup->get_count} <a @click.prevent="get_table('{$vo.name}')" href="javascript:;" >详情</a></td>
+                    <td>{$vo.name|$backup->get_size|get_size}</td>
+                    <td>{$vo.name|$backup->get_time}</td>
+                    <td>
+                    	<a href="{:url('update?id='.$vo['name'])}">还原</a> | 
+                    	<a download="{$vo.name}.zip" href="{$vo.download}">下载</a> | 
+                    	<a class="del" data-id=".id{$vo.name}"  href="{:url('del?dir='.$vo['name'])}">删除</a></td>
+               </tr>
+            {/volist}
+        </tbody>
+    </table>
+    <div class="table" style="display: none;">
+		<table class="layui-table layui-form">
+	        <colgroup>
+	            <col>
+	            <col>
+	        </colgroup>
+	        <thead>
+	            <tr>
+	                <th>文件名</th>
+	                <th>大小</th>
+	                <th>时间</th>
+	                <th>操作</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	            <tr v-for="vo in list">
+	                <td>{{vo.name}}</td>
+	                <td>{{vo.size}}</td>
+	                <td>{{vo.time}}</td>
+	                <td><a :download="vo.name" :href="vo.download">下载</a></td>
+	            </tr>
+	        </tbody>
+    </table>
+    </div>
+{/block}

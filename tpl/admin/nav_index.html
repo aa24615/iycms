@@ -1,0 +1,144 @@
+{extend name="public:base" /}
+{block name="style"}
+    <style>
+
+    </style>
+{/block}
+{block name="script"}
+    <script>
+        layui.use('form', function () {
+            var form = layui.form, layer = layui.layer, $ = layui.jquery;
+
+            form.on('switch(state)', function(data) {
+                var id = $(data.elem).attr("data-id");
+                $.ajax({
+                    url: "{:url('state?type=state')}",
+                    data: {
+                        id: id,
+                    },
+                    type: "get",
+                    dataType: "json",
+                    success: function(e) {
+                        if (e.code== 1) {
+                            layer.msg(e.msg, {
+                                icon: 1
+                            });
+                        } else {
+                            layer.msg(e.msg, {
+                                icon: 2,
+                                shade: 0.5,
+                                time: 2000,
+                                shadeClose: true
+                            });
+                        }
+                    }
+                });
+            });
+
+            form.on('switch(url_state)', function(data) {
+                var id = $(data.elem).attr("data-id");
+                $.ajax({
+                    url: "{:url('state?type=url_state')}",
+                    data: {
+                        id: id,
+                    },
+                    type: "get",
+                    dataType: "json",
+                    success: function(e) {
+                        if (e.code== 1) {
+                            layer.msg(e.msg, {
+                                icon: 1
+                            });
+                        } else {
+                            layer.msg(e.msg, {
+                                icon: 2,
+                                shade: 0.5,
+                                time: 2000,
+                                shadeClose: true
+                            });
+                        }
+                    }
+                });
+            });
+
+
+            form.on('switch(target)', function(data) {
+                var id = $(data.elem).attr("data-id");
+                $.ajax({
+                    url: "{:url('state?type=target')}",
+                    data: {
+                        id: id,
+                    },
+                    type: "get",
+                    dataType: "json",
+                    success: function(e) {
+                        if (e.code== 1) {
+                            layer.msg(e.msg, {
+                                icon: 1
+                            });
+                        } else {
+                            layer.msg(e.msg, {
+                                icon: 2,
+                                shade: 0.5,
+                                time: 2000,
+                                shadeClose: true
+                            });
+                        }
+                    }
+                });
+            });
+
+        });
+    </script>
+{/block}
+{block name="body"}
+
+    <a href="{:url('add')}" class="layui-btn"><i class="layui-icon">&#xe654;</i>添加导航</a>
+    <table class="layui-table layui-form">
+        <colgroup>
+            <col width="80">
+            <col width="150">
+            <col width="80">
+            <col width="80">
+            <col width="80">
+            <col>
+            <col width="150">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>排序</th>
+                <th>名称</th>
+                <th>显示</th>
+                <th>连接</th>
+                <th>新窗</th>
+                <th>地址</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {volist name="list" id="vo"}
+                <tr class="id{$vo.id}">
+                    <td>{$vo.sort}</td>
+                    <td>{$vo.name}</td>
+                    <td><input data-id="{$vo.id}"  lay-filter="state" type="checkbox" {eq name="vo.state" value="1"}checked{/eq} lay-text="开启|关闭" lay-skin="switch"></td>
+                    <td><input data-id="{$vo.id}" lay-filter="url_state" type="checkbox" {eq name="vo.url_state" value="1"}checked{/eq} lay-text="开启|关闭" lay-skin="switch"></td>
+                    <td><input data-id="{$vo.id}"  lay-filter="target" type="checkbox" {eq name="vo.target" value="_blank"}checked{/eq} lay-text="开启|关闭" lay-skin="switch"></td>
+                    <td>{$vo.url}</td>
+                    <td><a href="{:url('update?id='.$vo['id'])}">修改</a> | <a class="del" data-id=".id{$vo.id}"  href="{:url('del?id='.$vo['id'])}">删除</a></td>
+                </tr>
+                {php}$where['pid'] = $vo['id'];{/php}
+                {volist name=":get_list('nav',$where,100,'sort')" id="vo"}
+                    <tr class="id{$vo.id}">
+                        <td>{$vo.sort}</td>
+                        <td>|----------{$vo.name}</td>
+                        <td><input type="checkbox" data-id="{$vo.id}"  lay-filter="state" {eq name="vo.state" value="1"}checked{/eq} lay-text="开启|关闭" lay-skin="switch"></td>
+                        <td><input type="checkbox" data-id="{$vo.id}"  lay-filter="url_state" {eq name="vo.url_state" value="1"}checked{/eq} lay-text="开启|关闭" lay-skin="switch"></td>
+                        <td><input type="checkbox" data-id="{$vo.id}"  lay-filter="target" {eq name="vo.target" value="_blank"}checked{/eq} lay-text="开启|关闭" lay-skin="switch"></td>
+                        <td>{$vo.url}</td>
+                        <td><a href="{:url('update?id='.$vo['id'])}">修改</a> | <a class="del" data-id=".id{$vo.id}" href="{:url('del?id='.$vo['id'])}">删除</a></td>
+                    </tr>
+                {/volist}
+            {/volist}
+        </tbody>
+    </table>
+{/block}

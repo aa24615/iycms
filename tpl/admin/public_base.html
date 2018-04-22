@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>IYCMS博客管理系统 - 程序员的专用简历博客</title>
+		<link rel="stylesheet" href="__PUBLIC__/common/layui2/css/layui.css">
+		<link rel="stylesheet" href="__CSS__/style.css">
+		<script src="__PUBLIC__/common/layui2/layui.js"></script>
+		<script src="__PUBLIC__/common/vue/vue.min.js"></script>
+		<script src="__PUBLIC__/common/jquery/jquery.min.3.2.1.js"></script>
+		<script src="__JS__/common.js"></script>
+		<style>
+			.left ul li a[href='{$Think.cookie.menu_this}?this=1']{
+				color: #009688;
+				background: #28313c;
+			}			
+		</style>
+	</head>
+	<body>
+		<div class="top">
+			<h1>IYCMS</h1> 
+			<span class="breadcrumb">
+				<i class="layui-icon">&#xe715;</i>
+				{volist name="breadcrumb" id="vo"}
+				  	<a href="{eq name='vo.url' value='javascript:;'}javascript:;{else/}{$vo.url|url}{/eq}">{$vo.name}</a>
+				  	{neq name=":(count($breadcrumb)-1)" value="$key"}<span>/</span>{/neq}
+			  	{/volist}
+			</span>
+		</div>
+			
+		<div class="main">
+			<div class="left">
+				<ul class="cl">
+					{volist name="menu" id="vo"}
+						<li {eq name="vo.isan" value="0"}class="hidden"{/eq} data-id="{$vo.id}">
+							<a href="{$vo.url}">
+								<i class="layui-icon">{$vo.icon}</i>
+								{$vo.name}
+								<i class="layui-icon">{eq name="vo.isurl" value="0"}&#xe61a;{/eq}</i>
+							</a> 
+							<div>
+								{php}
+									$where['pid']=$vo['id'];
+									$where['state']=1;
+								{/php}
+								{volist name=":get_list('menu',$where,99)" id="vo2"}
+								<a href="{$vo2.url|url}?this=1">{$vo2.name}</a>
+								{/volist}
+							</div>
+						</li>
+					{/volist}
+				</ul>
+			</div>
+			<div class="right" id="app">
+				{block name="body"}{/block}
+				<!--<p style="position: fixed; bottom: 0; width: 100%; text-align: center;">iycms 博客管理系统 </p>-->
+			</div>
+		</div>
+		{block name="style"}{/block}
+		{block name="script"}{/block}
+	</body>
+</html>

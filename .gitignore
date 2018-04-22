@@ -1,0 +1,6 @@
+.*
+*.log
+runtime
+!.gitignore
+!.htaccess
+uploads

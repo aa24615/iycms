@@ -1,0 +1,95 @@
+{extend name="public:base" /}
+{block name="style"}
+    <style>
+
+    </style>
+{/block}
+{block name="script"}
+    <script>
+        layui.use(['form','laydate'], function () {
+            var form = layui.form,
+	            layer = layui.layer,
+	            $ = layui.jquery,
+	            laydate = layui.laydate;
+	        laydate.render({
+	            elem: '#date_start',type: "month"
+	        });
+	        laydate.render({
+	        	elem: '#date_end',type: "month"
+	        })
+            form.on('submit(submit)', function (data) {
+                layer.load({ time: 0 });
+                $.post(data.form.action, data.field, function (e) {
+                    layer.closeAll('loading');
+                    if (e.code == 1) {
+                        layer.msg(e.msg, { icon: 1, shade: 0.5, });
+                        setTimeout(function () { window.location.href = e.url; }, 1000);
+                    } else {
+                        layer.msg(e.msg, { icon: 2, shade: 0.5, time: 2000, shadeClose: true });
+                    }
+                })
+                return false;
+            });
+        });
+    </script>
+{/block}
+{block name="body"}
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>修改工作经历</legend>
+    </fieldset>
+    <form class="layui-form " action="">
+    	
+            
+        <div class="layui-form-item">
+            <label class="layui-form-label">公司名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="company" value="{$F.company}" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+ 
+        <div class="layui-form-item">
+            <label class="layui-form-label">部门</label>
+            <div class="layui-input-block">
+                <input type="text" name="department" value="{$F.department}" placeholder="" autocomplete="off"
+                    class="layui-input">
+            </div>
+        </div>
+        
+         <div class="layui-form-item">
+            <label class="layui-form-label">职位</label>
+            <div class="layui-input-block">
+                <input type="text" name="position" value="{$F.position}" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+         <div class="layui-form-item">
+            <label class="layui-form-label">在职时间</label>
+           <div class="layui-input-inline">
+                <input type="text" name="date_start" value="{$F.date_start}" id="date_start" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+    		<div class="layui-form-mid layui-word-aux"> - </div>
+            <div class="layui-input-inline">
+                <input type="text" name="date_end" value="{$F.date_end}" id="date_end" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">工作内容</label>
+            <div class="layui-input-block">
+                <textarea name="body" placeholder="" class="layui-textarea">{$F.body}</textarea>
+            </div>
+        </div>
+        
+        <div class="layui-form-item">
+            <label class="layui-form-label">是否显示</label>
+            <div class="layui-input-block">
+                <input type="checkbox" value="1" name="state" lay-text="开启|关闭" {eq name="F.state" value="1"}checked{/eq} lay-skin="switch">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="submit">立即提交</button>
+                
+            </div>
+        </div>
+    </form>
+
+{/block}

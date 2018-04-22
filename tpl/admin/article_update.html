@@ -1,0 +1,178 @@
+{extend name="public:base" /}
+{block name="style"}
+    <style>
+	.layui-form-item .layui-input-inline{
+            width: 500px;
+	}
+    </style>
+{/block}
+{block name="script"}
+    <script>
+        
+        var ue = UE.getEditor('container');
+        setTimeout(function () { 
+            ue.setHeight(500)
+        },500)
+        layui.use(['form','upload'], function () {
+            var form = layui.form,
+            	layer = layui.layer,
+            	upload = layui.upload;
+            	
+			upload.render({
+			    elem: '#file' //绑定元素
+			    ,url: "{:url('uploads/file')}" //上传接口
+			    ,done: function(res){
+			    	 //上传完毕回调
+                    if(res.code==1){
+                        $("#file_url").val(res.url);
+                    }else{
+                        layer.msg(res.info,function(){})
+                    }
+			    },error: function(){
+			    	layer.msg("上传异常");
+			    }
+			});
+			
+			upload.render({
+			    elem: '#pic' //绑定元素
+			    ,url: "{:url('uploads/pic')}" //上传接口
+			    ,done: function(res){
+			    	 //上传完毕回调
+                    if(res.code==1){
+                        $("#pic_url").val(res.url);
+                        $(".pic_url").attr("src",res.url);
+                    }else{
+                        layer.msg(res.info,function(){})
+                    }
+			    },error: function(){
+			    	layer.msg("上传异常");
+			    }
+			});
+  
+            form.on('submit(submit)', function (data) {
+                layer.load({ time: 0 });
+               
+                $.post(data.form.action, data.field, function (e) {
+                    layer.closeAll('loading');
+                    if (e.code == 1) {
+                        layer.msg(e.msg, { icon: 1, shade: 0.5, });
+                        setTimeout(function () { window.location.href = e.url; }, 1000);
+                    } else {
+                        layer.msg(e.msg, { icon: 2, shade: 0.5, time: 2000, shadeClose: true });
+                    }
+                })
+                return false;
+            });
+        });
+    </script>
+{/block}
+{block name="body"}
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="__PUBLIC__/common/ueditor/ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="__PUBLIC__/common/ueditor/ueditor.all.js"></script>
+
+
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>修改文章</legend>
+    </fieldset>
+
+
+    <form class="layui-form " action="">
+    	
+    	
+    	<div class="layui-form-item">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-block">
+                <img class="pic_url" src="{$F.pic}" height="200px" />
+            </div>
+        </div>
+        
+        
+    	<div class="layui-form-item">
+            <label class="layui-form-label">缩略图</label>
+            <div class="layui-input-inline">
+                <input type="text" name="pic" id="pic_url" value="{$F.pic}" placeholder="不上传就留空" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-word-aux">
+	            <button type="button" class="layui-btn" id="pic">
+					<i class="layui-icon">&#xe67c;</i>上传图片
+				</button>
+			</div>
+            
+        </div>
+        
+        <div class="layui-form-item">
+            <label class="layui-form-label">标题</label>
+            <div class="layui-input-inline">
+                <input type="text" name="title" value="{$F.title}" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+                <label class="layui-form-label">优先级</label>
+                <div class="layui-input-inline" style="width: 200px">
+                    <input type="text" name="sort" value="{$F.sort}" placeholder="" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">置顶时有效 数小靠前 不填为99</div>
+            </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">分类</label>
+            <div class="layui-input-inline" style="width: 200px">
+                <select name="type">
+                  <option value="0" {eq name="F.type" value="0"}selected{/eq} >顶级分类</option>
+                  {volist name="list" id="vo"}
+                    <option value="{$vo.id}" {eq name="F.type" value="$vo.id"}selected{/eq} >{$vo.name}</option>
+                    {volist name=":get_list('category','pid='.$vo['id'],100,'sort')" id="vo2"}
+                        <option value="{$vo2.id}" {eq name="F.type" value="$vo2.id"}selected{/eq} >&nbsp;&nbsp;&nbsp;{$vo2.name}</option>
+                    {/volist}
+                  {/volist}
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">内容</label>
+            <div class="layui-input-block" style="width: 1000px;">
+                <script id="container" name="body" style="height: 500px;" type="text/plain">{$F.body}</script>
+            </div>
+        </div>
+        
+        <div class="layui-form-item">
+                <label class="layui-form-label">关键词</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="key" placeholder="用英文豆号隔开" value="{$F.key}" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+  
+        <div class="layui-form-item">
+            <label class="layui-form-label">附件地址</label>
+            <div class="layui-input-inline">
+                <input type="text" name="file" value="{$F.file}" id="file_url"  placeholder="不上传就留空 可使用外链http://" autocomplete="off"
+                    class="layui-input">
+            </div>
+            <div class="layui-word-aux">
+	            <button type="button" class="layui-btn" id="file">
+					<i class="layui-icon">&#xe67c;</i>在线上传
+				</button>
+			</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">是否置顶</label>
+            <div class="layui-input-block">
+                <input type="checkbox" value="1" {eq name="F.top" value="1"}checked{/eq} name="top" lay-text="开启|关闭" lay-skin="switch">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">是否显示</label>
+            <div class="layui-input-block">
+                <input type="checkbox" value="1" name="state" lay-text="开启|关闭" {eq name="F.state" value="1"}checked{/eq} lay-skin="switch">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="submit">立即提交</button>
+                
+            </div>
+        </div>
+    </form>
+
+{/block}

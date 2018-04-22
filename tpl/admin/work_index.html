@@ -1,0 +1,79 @@
+{extend name="public:base" /}
+{block name="style"}
+    <style>
+
+    </style>
+{/block}
+{block name="script"}
+    <script>
+        layui.use('form', function () {
+            var form = layui.form, layer = layui.layer, $ = layui.jquery;
+
+            form.on('switch(state)', function(data) {
+                var id = $(data.elem).attr("data-id");
+                $.ajax({
+                    url: "{:url('state')}",
+                    data: {
+                        id: id,
+                    },
+                    type: "get",
+                    dataType: "json",
+                    success: function(e) {
+                        if (e.code== 1) {
+                            layer.msg(e.msg, {
+                                icon: 1
+                            });
+                        } else {
+                            layer.msg(e.msg, {
+                                icon: 2,
+                                shade: 0.5,
+                                time: 2000,
+                                shadeClose: true
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+{/block}
+{block name="body"}
+
+    <a href="{:url('add')}" class="layui-btn"><i class="layui-icon">&#xe654;</i>添加工作经历</a>
+    <table class="layui-table layui-form">
+        <colgroup>
+            <col width="50">
+            <col>
+            <col width="200">
+            <col width="200">
+            <col width="300">
+            <col width="100">
+            <col width="100">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>公司名</th>
+                <th>部门</th>
+                <th>职位</th>
+                <th>在职时间</th>
+                <th>显示</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {volist name="list" id="vo"}
+                <tr class="id{$vo.id}">
+                    <td>{$vo.id}</td>
+                    <td>{$vo.company}</td>
+                    <td>{$vo.position}</td>
+                    <td>{$vo.department}</td>
+                    <td>{$vo.date_start} - {$vo.date_end}</td>
+                    <td><input data-id="{$vo.id}" lay-filter="state" type="checkbox" {eq name="vo.state" value="1"}checked{/eq} lay-text="开启|关闭" lay-skin="switch"></td>
+                	
+                    <td><a href="{:url('update?id='.$vo['id'])}">修改</a> | <a class="del" data-id=".id{$vo.id}"  href="{:url('del?id='.$vo['id'])}">删除</a></td>
+               </tr>
+            {/volist}
+        </tbody>
+    </table>
+{/block}

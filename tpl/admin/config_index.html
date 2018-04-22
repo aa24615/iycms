@@ -1,0 +1,96 @@
+{extend name="public:base" /}
+{block name="style"}
+    <style>
+		
+    </style>
+{/block}
+{block name="script"}
+    <script>
+        layui.use('form', function () {
+            var form = layui.form, layer = layui.layer, $ = layui.jquery;
+            form.on('submit(submit)', function (data) {
+                layer.load({ time: 0 });
+                $.post(data.form.action, data.field, function (e) {
+                    layer.closeAll('loading');
+                    if (e.code == 1) {
+                        layer.msg(e.msg, { icon: 1, shade: 0.5, });
+                        setTimeout(function () { window.location.href = e.url; }, 1000);
+                    } else {
+                        layer.msg(e.msg, { icon: 2, shade: 0.5, time: 2000, shadeClose: true });
+                    }
+                })
+                return false;
+            });
+        });
+    </script>
+{/block}
+{block name="body"}
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>网站配置</legend>
+    </fieldset>
+    <form class="layui-form " action="">
+    	<div class="layui-form-item">
+                <label class="layui-form-label">网站名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="name" value="{$Think.config.config.name}" placeholder=""  class="layui-input">
+                </div>
+            </div>
+            
+        <div class="layui-form-item">
+            <label class="layui-form-label">网站标题</label>
+            <div class="layui-input-block">
+                <input type="text" name="title" value="{$Think.config.config.title}"  placeholder=""  class="layui-input">
+            </div>
+        </div>
+        
+ 
+        <div class="layui-form-item">
+            <label class="layui-form-label">关键词</label>
+            <div class="layui-input-block">
+                <input type="text" name="keywords" value="{$Think.config.config.keywords}" placeholder="" class="layui-input">
+            </div>
+        </div>
+        
+         <div class="layui-form-item">
+            <label class="layui-form-label">网站描述</label>
+            <div class="layui-input-block">
+      			<textarea name="description" placeholder=""  class="layui-textarea">{$Think.config.config.description}</textarea>
+            </div>
+        </div>
+        
+         <div class="layui-form-item">
+            <label class="layui-form-label">版版所有</label>
+            <div class="layui-input-block">
+                <input type="text" name="powerby" value="{$Think.config.config.powerby}" placeholder="" class="layui-input">
+            </div>
+        </div>
+        
+         <div class="layui-form-item">
+            <label class="layui-form-label">备案号</label>
+            <div class="layui-input-block">
+                <input type="text" name="beian" value="{$Think.config.config.beian}" placeholder="" class="layui-input">
+            </div>
+        </div>
+        
+        <div class="layui-form-item">
+            <label class="layui-form-label">是否闭站</label>
+            <div class="layui-input-block">
+                <input type="checkbox" value="1" name="state" lay-text="是|否" {eq name="Think.config.config.state" value="1"}checked{/eq} lay-skin="switch">
+            </div>
+        </div>
+        
+         <div class="layui-form-item">
+            <label class="layui-form-label">闭站提示</label>
+            <div class="layui-input-block">
+      			<textarea name="state_desc" placeholder="" class="layui-textarea">{$Think.config.config.state_desc}</textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="submit">立即提交</button>
+                
+            </div>
+        </div>
+    </form>
+
+{/block}

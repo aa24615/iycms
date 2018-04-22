@@ -1,0 +1,169 @@
+{extend name="public:base" /}
+{block name="style"}
+    <style>
+
+    </style>
+{/block}
+{block name="script"}
+    <script>
+        layui.use('form', function () {
+            var form = layui.form, layer = layui.layer, $ = layui.jquery;
+
+            form.on('switch(state)', function(data) {
+                var id = $(data.elem).attr("data-id");
+                $.ajax({
+                    url: "{:url('state')}",
+                    data: {
+                        id: id,
+                    },
+                    type: "get",
+                    dataType: "json",
+                    success: function(e) {
+                        if (e.code== 1) {
+                            layer.msg(e.msg, {
+                                icon: 1
+                            });
+                        } else {
+                            layer.msg(e.msg, {
+                                icon: 2,
+                                shade: 0.5,
+                                time: 2000,
+                                shadeClose: true
+                            });
+                        }
+                    }
+                });
+            });
+            
+            form.on('switch(top)', function(data) {
+                var id = $(data.elem).attr("data-id");
+                $.ajax({
+                    url: "{:url('top')}",
+                    data: {
+                        id: id,
+                    },
+                    type: "get",
+                    dataType: "json",
+                    success: function(e) {
+                        if (e.code== 1) {
+                            layer.msg(e.msg, {
+                                icon: 1
+                            });
+                        } else {
+                            layer.msg(e.msg, {
+                                icon: 2,
+                                shade: 0.5,
+                                time: 2000,
+                                shadeClose: true
+                            });
+                        }
+                    }
+                });
+            });
+
+            form.on('switch(experiment)', function(data) {
+                var id = $(data.elem).attr("data-id");
+                $.ajax({
+                    url: "{:url('experiment')}",
+                    data: {
+                        id: id,
+                    },
+                    type: "get",
+                    dataType: "json",
+                    success: function(e) {
+                        if (e.code== 1) {
+                            layer.msg(e.msg, {
+                                icon: 1
+                            });
+                        } else {
+                            layer.msg(e.msg, {
+                                icon: 2,
+                                shade: 0.5,
+                                time: 2000,
+                                shadeClose: true
+                            });
+                        }
+                    }
+                });
+            });
+
+            form.on('switch(works)', function(data) {
+                var id = $(data.elem).attr("data-id");
+                $.ajax({
+                    url: "{:url('works')}",
+                    data: {
+                        id: id,
+                    },
+                    type: "get",
+                    dataType: "json",
+                    success: function(e) {
+                        if (e.code== 1) {
+                            layer.msg(e.msg, {
+                                icon: 1
+                            });
+                        } else {
+                            layer.msg(e.msg, {
+                                icon: 2,
+                                shade: 0.5,
+                                time: 2000,
+                                shadeClose: true
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+{/block}
+{block name="body"}
+
+    <a href="{:url('add')}" class="layui-btn"><i class="layui-icon">&#xe654;</i>添加文章</a>
+    <table class="layui-table layui-form">
+        <colgroup>
+            <col width="80">
+            <col width="100">
+            <col width="100">
+            <col>
+            <col width="80">
+            <col width="80">
+            <col width="80">
+            <col width="80">
+            <col width="80">
+            <col width="200">
+            <col width="150">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>缩略图</th>
+                <th>分类</th>
+                <th>标题</th>
+                <th>浏览</th>
+                <th>显示</th>
+                <th>置顶</th>
+                <th>实验室</th>
+                <th>作品</th>
+                <th>时间</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {volist name="list" id="vo"}
+                <tr class="id{$vo.id}">
+                    <td>{$vo.id}</td>
+                    <td><img src="{$vo.pic}" height="50px"/></td>
+                    <td>{$vo.type}</td>
+                    <td>{$vo.title}</td>
+                    <td>{$vo.a}</td>
+                    <td><input data-id="{$vo.id}" lay-filter="state" type="checkbox" {eq name="vo.state" value="1"}checked{/eq} lay-text="开启|关闭" lay-skin="switch"></td>
+                    <td><input data-id="{$vo.id}" lay-filter="top" type="checkbox" {eq name="vo.top" value="1"}checked{/eq} lay-text="开启|关闭" lay-skin="switch"></td>
+                    <td><input data-id="{$vo.id}" lay-filter="experiment" type="checkbox" {eq name="vo.experiment" value="1"}checked{/eq} lay-text="开启|关闭" lay-skin="switch"></td>
+                    <td><input data-id="{$vo.id}" lay-filter="works" type="checkbox" {eq name="vo.works" value="1"}checked{/eq} lay-text="开启|关闭" lay-skin="switch"></td>
+                    
+                    <td>{$vo.time|date="Y-m-d H:i:s",###}</td>
+                    <td><a href="{:url('update?id='.$vo['id'])}">修改</a> | <a class="del" data-id=".id{$vo.id}"  href="{:url('del?id='.$vo['id'])}">删除</a></td>
+               </tr>
+            {/volist}
+        </tbody>
+    </table>
+{/block}

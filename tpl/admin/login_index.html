@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>管理员登陆 - IYCMS博客管理系统</title>
+    <link rel="stylesheet" href="/static/admin/css/style.css">
+    <link rel="stylesheet" href="/static/common/layui2/css/layui.css">
+    <script src="/static/common/layui2/layui.js"></script>
+  </head>
+
+  <body id="login">
+    <div class="login">
+      <h2>IYCMS博客管理系统</h2>
+      <form class="layui-form" method="post" target="_blank" action="">
+        <div class="layui-form-item">
+          <input type="username" name="user" placeholder="管理员用户名" required lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-form-item">
+          <input type="password" name="pwd" placeholder="管理员密码" required lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-form-item">
+          <input type="checkbox" name="box" lay-skin="primary" title="记住密码" checked=""> <a class="r back" href="javascript:;"  style="margin-top: 10px">忘记密码</a>
+        </div>
+        <div class="layui-form-item">
+          <button style="width: 100%" class="layui-btn" lay-submit lay-filter="login">立即登录</button>
+        </div>
+      </form>
+      <script>
+        layui.use('form', function () {
+          var form = layui.form,
+              layer = layui.layer,
+              $ = layui.jquery;
+              
+          form.on('submit(login)', function (data) {
+            layer.load({
+              shade: 0.5,
+              time: 0,
+            });
+            $.post(data.form.action, data.field, function (e) {
+              layer.closeAll('loading');
+              if (e.code == 1) {
+                layer.msg(e.msg, {
+                  icon: 1,
+                  shade: 0.5,
+                });
+                setTimeout(function () {
+                  window.location.href = e.url;
+                }, 2000);
+              } else {
+                layer.msg(e.msg, {
+                  icon: 2,
+                  shade: 0.5,
+                  time: 2000,
+                  shadeClose: true
+                });
+              }
+            })
+            return false;
+          });
+          $(".back").click(function(){
+            layer.open({
+              type: 1,
+              title: "找回管理员密码",
+              shadeClose: true,
+              content: '<div style="margin: 20px;">\
+              <b>mongodb客户端重置密码</b>\
+              <p><b>#</b> mongodb安装位置/mongo</p>\
+              <p><b>></b> use iycms</p>\
+              <p><b>></b> db.iycms_admin.update({"admin":"admin"},{set:{"pwd":"7a57a5a743894a0e"}})</p>\
+              <p>完成重置密码 admin</p>\
+              <p>&nbsp;</p>\
+              <b>使用iycms工具箱找回</b>\
+              <p><a href="javascript:;">点击这里下载</a>,并上传至ftp目录 /Application/Admin/Controller/<p>\
+              <p>在浏览器打开 http://您的域名/admin/tools.html<p>\
+              </div>'
+            });
+          })
+        });
+      </script>
+    </div>
+  </body>
+
+</html>

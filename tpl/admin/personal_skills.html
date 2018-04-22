@@ -1,0 +1,145 @@
+{extend name="public:base" /}
+{block name="style"}
+    <style>
+        .layui-form-item {
+            float: left;
+            clear: none;
+        }
+        .layui-form-item .layui-input-inline{
+            width: 290px;
+        }
+    </style>
+{/block}
+{block name="script"}
+    <script>
+        var list = {$list};
+    	var vue = new Vue({
+    		el: '#app',
+			data: {
+				after :list,
+			}
+		})
+        layui.use(['form', 'upload', 'laydate'], function () {
+            var form = layui.form,
+            layer = layui.layer, 
+            $ = layui.jquery;
+        
+            form.on('submit(submit)', function (data) {
+                layer.load({ time: 0 });
+                $.post(data.form.action, data.field, function (e) {
+                    layer.closeAll('loading');
+                    if (e.code == 1) {
+                        layer.msg(e.msg, { icon: 1, shade: 0.5, });
+                        setTimeout(function () { window.location.href = e.url; }, 1000);
+                    } else {
+                        layer.msg(e.msg, { icon: 2, shade: 0.5, time: 2000, shadeClose: true });
+                    }
+                })
+                return false;
+            });
+        });
+    </script>
+{/block}
+{block name="body"}
+
+
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>技能管理</legend>
+    </fieldset>
+
+
+    <form class="layui-form " action="">
+
+
+        <fieldset class="layui-elem-field ">
+            <legend>后端</legend>
+            <div class="layui-field-box">
+            	
+            	
+            	<div class="layui-form-item" v-for="vo,index in list" v-if="vo.id<=20">
+                    <div class="layui-input-inline">
+                        <div class="layui-row">
+                            <div class="layui-col-md9">
+                                <input type="text" :name="'name['+vo.id+'][name]'" :value="vo.name" placeholder="技能名称" class="layui-input">
+                            </div>
+                            <div class="layui-col-md3">
+                                <input type="text" :name="'name['+vo.id+'][value]'" :value="vo.value" placeholder="熟练度" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">%</div>
+                </div>
+
+                
+            </div>
+        </fieldset>
+        <fieldset class="layui-elem-field ">
+            <legend>数据库</legend>
+            <div class="layui-field-box">
+
+                <div class="layui-form-item" v-for="vo,index in list" v-if="vo.id>20 && vo.id<=30">
+                    <div class="layui-input-inline">
+                        <div class="layui-row">
+                            <div class="layui-col-md9">
+                                <input type="text" :name="'name['+vo.id+'][name]'" :value="vo.name" placeholder="技能名称" class="layui-input">
+                            </div>
+                            <div class="layui-col-md3">
+                                <input type="text" :name="'name['+vo.id+'][value]'" :value="vo.value" placeholder="熟练度" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">%</div>
+                </div>
+
+            </div>
+        </fieldset>
+        <fieldset class="layui-elem-field ">
+            <legend>前端</legend>
+            <div class="layui-field-box">
+
+                <div class="layui-form-item" v-for="vo,index in list" v-if="vo.id>30 && vo.id<=40">
+                    <div class="layui-input-inline">
+                        <div class="layui-row">
+                            <div class="layui-col-md9">
+                                <input type="text" :name="'name['+vo.id+'][name]'" :value="vo.name" placeholder="技能名称" class="layui-input">
+                            </div>
+                            <div class="layui-col-md3">
+                                <input type="text" :name="'name['+vo.id+'][value]'" :value="vo.value" placeholder="熟练度" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">%</div>
+                </div>
+
+            </div>
+        </fieldset>
+
+        <fieldset class="layui-elem-field ">
+            <legend>设计</legend>
+            <div class="layui-field-box">
+
+                <div class="layui-form-item" v-for="vo,index in list" v-if="vo.id>40 && vo.id<=50">
+                    <div class="layui-input-inline">
+                        <div class="layui-row">
+                            <div class="layui-col-md9">
+                                <input type="text" :name="'name['+vo.id+'][name]'" :value="vo.name" placeholder="技能名称" class="layui-input">
+                            </div>
+                            <div class="layui-col-md3">
+                                <input type="text" :name="'name['+vo.id+'][value]'" :value="vo.value" placeholder="熟练度" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">%</div>
+                </div>
+                
+            </div>
+        </fieldset>
+
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="submit">立即提交</button>
+        </div>
+
+
+    </form>
+
+{/block}

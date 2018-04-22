@@ -1,0 +1,324 @@
+{extend name="public:base" /}
+{block name="style"}
+    <style>
+    </style>
+{/block}
+{block name="script"}
+    <script>
+    	var vue = new Vue({
+    		el: '#app',
+			data: {
+				my_province_list: [
+					{region_id:0,region_name:"请选择"},
+			   		{volist name=":get_list('region','parent_id=1',999)" id="vo"}
+                   		{region_id:{$vo.region_id},region_name:'{$vo.region_name}'},
+                    {/volist}
+                    	],
+			    my_city_list:[{region_id:0,region_name:"请选择"}],
+			    my_area_list:[{region_id:0,region_name:"请选择"}],
+			    
+			    home_province_list: [
+			    	{region_id:0,region_name:"请选择"},
+			   		{volist name=":get_list('region','parent_id=1',999)" id="vo"}
+                   		{region_id:{$vo.region_id},region_name:'{$vo.region_name}'},
+                    {/volist}
+                    	],
+			    home_city_list:[{region_id:0,region_name:"请选择"}],
+			    home_area_list:[{region_id:0,region_name:"请选择"}],
+			    
+			    my_province:"{$F.my_province}",
+			    my_city:"{$F.my_city}",
+			    my_area:"{$F.my_area}",
+			    home_province:"{$F.home_province}",
+			    home_city:"{$F.home_city}",
+			    home_area:"{$F.home_area}",
+			    name:'{$F.name}',
+			    nick:'{$F.nick}',
+			    head:"{$F.head|default='__PUBLIC__/common/image/head.jpg'}",
+			    sex:'{$F.sex}',
+			    sex_list:["男","女"],
+			    birthday:'{$F.birthday}',
+			    calendar:'{$F.calendar}',
+			    calendar_list:['公历',"农历"],
+			    qq:'{$F.qq}',
+			    wx:'{$F.wx}',
+			    email:'{$F.email}',
+			    url:'{$F.url}',
+			    github:'{$F.github}',
+			    gitosc:'{$F.gitosc}',
+			    desc:`{$F.desc}`
+			}
+    	})
+        layui.use(['form','upload','laydate'], function () {
+            var form = layui.form, 
+	            layer = layui.layer, 
+	            $= layui.jquery, 
+	            laydate = layui.laydate, 
+	            upload = layui.upload;
+	        laydate.render({
+	             elem: '#birthday' //指定元素
+	        });
+            var uploadInst = upload.render({
+                elem: '#upload' //绑定元素
+                , url: "{:url('uploads/head')}" //上传接口
+                , done: function (res) {
+                    //上传完毕回调
+                    if(res.code==1){
+                        vue.head = res.url;
+                    }else{
+                        layer.msg(res.info,function(){})
+                    }
+                }
+                , error: function () {
+                    //请求异常回调
+                }
+            });
+            
+            //默认列表
+            
+            //故乡城市
+            vue.my_province!=0 && $.get("{:url('region/city')}",{parent_id:vue.my_province},(e)=>{
+			   	vue.my_city_list = e;
+			   	setTimeout(()=>{
+			   		form.render('select');
+			   	},5)
+			})
+            //故乡县区
+            vue.my_city!=0 && $.get("{:url('region/city')}",{parent_id:vue.my_city},(e)=>{
+			   	vue.my_area_list = e;
+			   	setTimeout(()=>{
+			   		form.render('select');
+			   	},5)
+			})
+            
+            //所在地城市
+            vue.home_province!=0 && $.get("{:url('region/city')}",{parent_id:vue.home_province},(e)=>{
+			   	vue.home_city_list = e;
+			   	setTimeout(()=>{
+			   		form.render('select');
+			   	},5)
+			})
+            //所在地县区
+            vue.home_city!=0 && $.get("{:url('region/city')}",{parent_id:vue.home_city},(e)=>{
+			   	vue.home_area_list = e;
+			   	setTimeout(()=>{
+			   		form.render('select');
+			   	},5)
+			})
+            
+            
+            form.on('select(my_province)', function(data){
+			   	$.get("{:url('region/city')}",{parent_id:data.value},(e)=>{
+			   		vue.my_city_list = e;
+			   		setTimeout(()=>{
+			   			form.render('select');
+			   		},5)
+			   		
+			   	})
+			});
+			form.on('select(my_city)', function(data){
+			   	$.get("{:url('region/city')}",{parent_id:data.value},(e)=>{
+			   		vue.my_area_list = e;
+			   		setTimeout(()=>{
+			   			form.render('select');
+			   		},5)
+			   		
+			   	})
+			});
+			
+			form.on('select(home_province)', function(data){
+			   	$.get("{:url('region/city')}",{parent_id:data.value},(e)=>{
+			   		vue.home_city_list = e;
+			   		setTimeout(()=>{
+			   			form.render('select');
+			   		},5)
+			   		
+			   	})
+			});
+			form.on('select(home_city)', function(data){
+			   	$.get("{:url('region/city')}",{parent_id:data.value},(e)=>{
+			   		vue.home_area_list = e;
+			   		setTimeout(()=>{
+			   			form.render('select');
+			   		},5)
+			   		
+			   	})
+			});
+
+
+            form.on('submit(submit)', function (data) {
+                layer.load({ time: 0 });
+                $.post(data.form.action, data.field, function (e) {
+                    layer.closeAll('loading');
+                    if (e.code == 1) {
+                        layer.msg(e.msg, { icon: 1, shade: 0.5, });
+                        setTimeout(function () { window.location.href = e.url; }, 1000);
+                    } else {
+                        layer.msg(e.msg, { icon: 2, shade: 0.5, time: 2000, shadeClose: true });
+                    }
+                })
+                return false;
+            });
+        });
+    </script>
+{/block}
+{block name="body"}
+
+
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>个人资料</legend>
+    </fieldset>
+
+
+    <form class="layui-form " action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label">头像</label>
+            <div class="layui-input-block">
+                <img class="head" width="100" height="100" :src="head" />
+            </div>
+       
+        </div>
+        <div class="layui-form-item">
+                <label class="layui-form-label"></label>
+                <input class="head" name="head" type="hidden" :value="head" />
+                <div class="layui-input-block">
+                    <button type="button" class="layui-btn" id="upload">
+                        <i class="layui-icon">&#xe67c;</i>更换头像
+                    </button>
+                </div>
+            </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">姓名</label>
+            <div class="layui-input-inline">
+                <input type="text" name="name" :value="name" placeholder="您的真实姓名" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">网名</label>
+            <div class="layui-input-inline">
+                <input type="text" name="nick" :value="nick" placeholder="您的网名" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">性别</label>
+            <div class="layui-input-block">
+                <input type="radio" v-for="vo in sex_list"  name="sex" v-model="sex" :value="vo" :title="vo" >
+            </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">出生日期</label>
+            <div class="layui-input-inline">
+                <input type="text" name="birthday" :value="birthday" id="birthday" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-input-inline">
+                <input type="radio"  v-for="vo in calendar_list" v-model="calendar" name="calendar" :value="vo" :title="vo" >
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">故乡</label>
+            <div class="layui-input-inline">
+                 <select lay-filter="my_province"  name="my_province" >
+                    <option v-for="vo in my_province_list" v-if="my_province!=vo.region_id"  v-model="my_province" :value="vo.region_id">{{vo.region_name}}</option>
+                	<option v-else :value="vo.region_id" selected>{{vo.region_name}}</option>
+                 </select>
+            </div>
+            <div class="layui-form-mid layui-word-aux">省</div>
+            <div class="layui-input-inline">
+                <select lay-filter="my_city"  name="my_city" >
+                    <option v-for="vo in my_city_list" v-if="my_city!=vo.region_id" v-model="my_city" :value="vo.region_id">{{vo.region_name}}</option>
+                	<option v-else :value="vo.region_id" selected>{{vo.region_name}}</option>
+                </select>
+            </div>
+            <div class="layui-form-mid layui-word-aux">市</div>
+            <div class="layui-input-inline">
+                <select name="my_area" >
+                    <option v-for="vo in my_area_list" v-if="my_area!=vo.region_id"  v-model="my_area" :value="vo.region_id">{{vo.region_name}}</option>
+                	<option v-else :value="vo.region_id" selected>{{vo.region_name}}</option>
+                </select>
+            </div>
+            <div class="layui-form-mid layui-word-aux">区</div>
+        </div>
+
+		
+        <div class="layui-form-item">
+            <label class="layui-form-label">所在地</label>
+              <div class="layui-input-inline">
+               
+                <select lay-filter="home_province"  name="home_province" >
+                    <option v-for="vo in home_province_list" v-if="home_province!=vo.region_id"  v-model="home_province" :value="vo.region_id">{{vo.region_name}}</option>
+                	<option v-else :value="vo.region_id" selected>{{vo.region_name}}</option>
+                </select>
+                
+            </div>
+            <div class="layui-form-mid layui-word-aux">省</div>
+            <div class="layui-input-inline">
+                <select lay-filter="home_city"  name="home_city" >
+                    <option v-for="vo in home_city_list" v-if="home_city!=vo.region_id" v-model="home_city" :value="vo.region_id">{{vo.region_name}}</option>
+                	<option v-else :value="vo.region_id" selected>{{vo.region_name}}</option>
+                </select>
+            </div>
+            <div class="layui-form-mid layui-word-aux">市</div>
+            <div class="layui-input-inline">
+                <select name="home_area" >
+                    <option v-for="vo in home_area_list" v-if="home_area!=vo.region_id" v-model="home_area" :value="vo.region_id">{{vo.region_name}}</option>
+                	<option v-else :value="vo.region_id" selected>{{vo.region_name}}</option>
+                </select>
+            </div>
+
+            <div class="layui-form-mid layui-word-aux">区</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">扣扣</label>
+            <div class="layui-input-inline">
+                <input type="text" name="qq" :value="qq" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">微信</label>
+            <div class="layui-input-inline">
+                <input type="text" name="wx" :value="wx" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">邮箱</label>
+            <div class="layui-input-inline">
+                <input type="text" name="email" :value="email" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">个人博客</label>
+            <div class="layui-input-block">
+                <input type="text" name="url" :value="url" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">Github</label>
+            <div class="layui-input-block">
+                <input type="text" name="github" :value="github" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">Git.Osc</label>
+            <div class="layui-input-block">
+                <input type="text" name="gitosc" :value="gitosc" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">关于我</label>
+                <div class="layui-input-block">
+                  <textarea name="desc" placeholder="一句话概括自己" class="layui-textarea">{{desc}}</textarea>
+                </div>
+              </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="submit">立即提交</button>
+                
+            </div>
+        </div>
+
+    </form>
+
+{/block}
