@@ -39,5 +39,5 @@ location / {
 
 ## 联系我们
 
-QQ群: [324098841](http://shang.qq.com/wpa/qunwpa?idkey=6f5462146888da75feaaa1fe1ab3addfcea63f6454548238033c6a91fa610e4e)   
+QQ群: [324098841](http://shang.qq.com/wpa/qunwpa?idkey=6f5462146888da75feaaa1fe1ab3addfcea63f6454548238033c6a91fa610e4e)      
 QQ号: [839024615](http://wpa.qq.com/msgrd?v=3&uin=839024615&site=qq&menu=yes) 
