@@ -11,6 +11,47 @@
 
 // 应用公共文件
 
+//计算多少分秒之前
+//$time 时间戳
+//最后得出 xx秒前
+function get_timejq($time){
+    //计算天数
+    $timediff = time()-$time;
+    $days = intval($timediff/86400);
+    if($days==1) {
+        return "昨天 " . date("H:i:s", $time);
+    }
+    if($days==2){
+        return "前天 ".date("H:i:s",$time);
+    }
+    if($days<5 and $days>2){
+        return $days."天前";
+    }
+    if($days>5){
+        return date("Y-m-d",$time);
+    }
+
+    //计算小时数
+    $remain = $timediff%86400;
+    $hours = intval($remain/3600);
+    if($hours!=0){
+        return $hours."小时前";
+    }
+    //计算分钟数
+    $remain = $remain%3600;
+    $mins = intval($remain/60);
+    if($mins!=0){
+        return $mins."分钟前";
+    }
+    //计算秒数
+    $secs = $remain%60;
+
+    return $secs."秒前";
+
+}
+
+
+
 //html转text
 function html2text($str){  
   $str = preg_replace("/<style .*?<\/style>/is", "", $str);
@@ -114,3 +155,5 @@ function get_find($table,$where="",$field=""){
 		return $F;
 	}
 }
+
+
