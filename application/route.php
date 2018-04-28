@@ -10,8 +10,8 @@
 // +----------------------------------------------------------------------
 
 return [
-    'admin/:x$' => 'admin/',
-    ':x$'   => 'home/index/index',
+    //'admin/:x$' => 'admin/',
+    //':x$'   => 'home/index/index',
 //    ':x/:x$'   => 'home/index/index',
 //    ':x/:x/:x$'   => 'home/index/index',
 ];

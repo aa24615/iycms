@@ -189,7 +189,7 @@ CREATE TABLE `iycms_keys` (
   `name` char(50) DEFAULT NULL,
   `a` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='TAG表';
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='TAG表';
 
 -- -----------------------------
 -- 表数据  `iycms_keys` 共11条
@@ -216,7 +216,7 @@ INSERT INTO `iycms_keys` VALUES ('11','vue博客','0');
 DROP TABLE IF EXISTS `iycms_leave`;
 CREATE TABLE `iycms_leave` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `uid` int(11) DEFAULT NULL,
+  `qq` int(11) DEFAULT NULL,
   `pid` int(11) DEFAULT NULL,
   `time` int(11) DEFAULT NULL,
   `content` text,
@@ -226,16 +226,39 @@ CREATE TABLE `iycms_leave` (
   `os` varchar(50) DEFAULT NULL,
   `region` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8 COMMENT='留言表';
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8 COMMENT='留言表';
 
 -- -----------------------------
--- 表数据  `iycms_leave` 共5条
+-- 表数据  `iycms_leave` 共28条
 -- -----------------------------
 INSERT INTO `iycms_leave` VALUES ('40','0','0','1524396995','<img src="/static/home/img/qqbq/22.gif"><img src="/static/home/img/qqbq/22.gif"><img src="/static/home/img/qqbq/7.gif"><img src="/static/home/img/qqbq/7.gif">','127.0.0.1','Chrome','简体中文','Mac','  ');
 INSERT INTO `iycms_leave` VALUES ('41','0','0','1524397125','<img src="/static/home/img/qqbq/41.gif"><img src="/static/home/img/qqbq/41.gif"><img src="/static/home/img/qqbq/41.gif">','127.0.0.1','Chrome','简体中文','Mac','  ');
 INSERT INTO `iycms_leave` VALUES ('42','0','0','1524397415','<img src="/static/home/img/qqbq/21.gif"><img src="/static/home/img/qqbq/21.gif"><img src="/static/home/img/qqbq/21.gif">','127.0.0.1','Chrome','简体中文','Mac','  ');
 INSERT INTO `iycms_leave` VALUES ('43','0','0','1524397541','212<div>13</div><div>2</div><div>13</div><div>2</div><div>1</div><div>2</div><div>31</div><div>23</div><div>12</div><div>3</div><div>12</div><div>3</div><div>12</div><div>3</div>','127.0.0.1','Chrome','简体中文','Mac','  ');
 INSERT INTO `iycms_leave` VALUES ('44','0','0','1524397555','<img src="/static/home/img/qqbq/5.gif"><img src="/static/home/img/qqbq/5.gif">','127.0.0.1','Chrome','简体中文','Mac','  ');
+INSERT INTO `iycms_leave` VALUES ('45','0','0','1524761105','<b>h目</b><img src="/static/home/img/qqbq/39.gif"><img src="/static/home/img/qqbq/39.gif"><img src="/static/home/img/qqbq/39.gif"><img src="/static/home/img/qqbq/39.gif">','127.0.0.1','Chrome','简体中文','Mac','  ');
+INSERT INTO `iycms_leave` VALUES ('46','0','0','1524805805','2222222多大的嘀嗒嘀嗒嘀嗒的','127.0.0.1','Chrome','简体中文','Mac','  ');
+INSERT INTO `iycms_leave` VALUES ('47','0','0','1524805827','<img src="/static/home/img/qqbq/6.gif"><img src="/static/home/img/qqbq/6.gif"><img src="/static/home/img/qqbq/6.gif">','127.0.0.1','Chrome','简体中文','Mac','  ');
+INSERT INTO `iycms_leave` VALUES ('48','0','0','1524808890','<img src="/static/home/img/qqbq/7.gif"><img src="/static/home/img/qqbq/7.gif"><img src="/static/home/img/qqbq/7.gif"><img src="/static/home/img/qqbq/7.gif"><img src="/static/home/img/qqbq/7.gif"><img src="/static/home/img/qqbq/7.gif">','127.0.0.1','Chrome','简体中文','Mac','  ');
+INSERT INTO `iycms_leave` VALUES ('49','0','0','1524809105','cx在线啊西安市a sss&nbsp;&nbsp;','127.0.0.1','Chrome','简体中文','Mac','  ');
+INSERT INTO `iycms_leave` VALUES ('50','0','0','1524809112','<img src="/static/home/img/qqbq/6.gif"><img src="/static/home/img/qqbq/6.gif"><img src="/static/home/img/qqbq/6.gif"><img src="/static/home/img/qqbq/6.gif">','127.0.0.1','Chrome','简体中文','Mac','  ');
+INSERT INTO `iycms_leave` VALUES ('51','0','0','1524809122','<img src="/static/home/img/qqbq/37.gif"><img src="/static/home/img/qqbq/37.gif"><img src="/static/home/img/qqbq/37.gif">','127.0.0.1','Chrome','简体中文','Mac','  ');
+INSERT INTO `iycms_leave` VALUES ('52','0','0','1524809132','<img src="/static/home/img/qqbq/5.gif"><img src="/static/home/img/qqbq/5.gif"><img src="/static/home/img/qqbq/5.gif">','127.0.0.1','Chrome','简体中文','Mac','  ');
+INSERT INTO `iycms_leave` VALUES ('53','0','0','1524810372','ssssssssssssssssssss','127.0.0.1','Chrome','简体中文','Mac','  ');
+INSERT INTO `iycms_leave` VALUES ('54','0','0','1524810410','d\'d\'d\'d\'d\'d\'d\'d\'d呜呜呜呜呜呜','127.0.0.1','Chrome','简体中文','Mac','  ');
+INSERT INTO `iycms_leave` VALUES ('55','0','0','1524810505','ssssSsssssssssssssss','127.0.0.1','Chrome','简体中文','Mac','  ');
+INSERT INTO `iycms_leave` VALUES ('56','0','0','1524811909','<img src="/static/home/img/qqbq/20.gif"><img src="/static/home/img/qqbq/20.gif">','127.0.0.1','Chrome','简体中文','Mac','  ');
+INSERT INTO `iycms_leave` VALUES ('57','839024615','0','1524812101','sssssssssssssssssdddddddd','127.0.0.1','Chrome','简体中文','Mac','  ');
+INSERT INTO `iycms_leave` VALUES ('58','1270127079','0','1524812272','ddddddddddddd','127.0.0.1','Chrome','简体中文','Mac','  ');
+INSERT INTO `iycms_leave` VALUES ('59','12345670','0','1524813161','多大的嘀嗒嘀嗒嘀嗒等等嘀嗒嘀嗒嘀嗒八月份脸肷','127.0.0.1','Chrome','简体中文','Mac','  ');
+INSERT INTO `iycms_leave` VALUES ('60','839024615','58','1524885809','233333333333222222222','127.0.0.1','Chrome','简体中文','Mac','  ');
+INSERT INTO `iycms_leave` VALUES ('61','839024615','59','1524887372','qqqqqqqqqqqqqqqqqqq','127.0.0.1','Chrome','简体中文','Mac','  ');
+INSERT INTO `iycms_leave` VALUES ('62','12345','59','1524887552','111111你大 有仍仍 使用使用&nbsp;','127.0.0.1','Chrome','简体中文','Mac','  ');
+INSERT INTO `iycms_leave` VALUES ('63','12345','0','1524887614','<img src="/static/home/img/qqbq/9.gif"><img src="/static/home/img/qqbq/9.gif"><img src="/static/home/img/qqbq/9.gif"><img src="/static/home/img/qqbq/9.gif"><img src="/static/home/img/qqbq/9.gif"><img src="/static/home/img/qqbq/9.gif">222','127.0.0.1','Chrome','简体中文','Mac','  ');
+INSERT INTO `iycms_leave` VALUES ('64','343918431','62','1524888466','sddw32<img src="/static/home/img/qqbq/7.gif"><img src="/static/home/img/qqbq/7.gif"><img src="/static/home/img/qqbq/7.gif"><img src="/static/home/img/qqbq/7.gif">','127.0.0.1','Chrome','简体中文','Mac','  ');
+INSERT INTO `iycms_leave` VALUES ('65','55941677','61','1524889412','收拾收拾收<div>拾收拾是收<div>拾收拾是<div>收拾收拾是<img src="/static/home/img/qqbq/23.gif"><img src="/static/home/img/qqbq/23.gif"><img src="/static/home/img/qqbq/23.gif"></div></div></div>','127.0.0.1','Chrome','简体中文','Mac','  ');
+INSERT INTO `iycms_leave` VALUES ('66','839024615','0','1524890048','ssssss<div>123</div><div><br></div><div>2</div><div>123</div><div>12</div><div><br></div>','127.0.0.1','Chrome','简体中文','Mac','  ');
+INSERT INTO `iycms_leave` VALUES ('67','839024615','66','1524890148','回复个试试<div>贴个图</div><div><br></div><img src="http://passport.onethink.cn/Avatar/000/008/76/96/80_80.gif" />','127.0.0.1','Chrome','简体中文','Mac','  ');
 
 -- -----------------------------
 -- 数据库由iycms博客管理系统备份
@@ -3972,6 +3995,35 @@ INSERT INTO `iycms_skills` VALUES ('63','','');
 INSERT INTO `iycms_skills` VALUES ('64','','');
 INSERT INTO `iycms_skills` VALUES ('65','','');
 INSERT INTO `iycms_skills` VALUES ('66','','');
+
+-- -----------------------------
+-- 数据库由iycms博客管理系统备份
+-- -----------------------------
+
+-- -----------------------------
+-- 表结构  `iycms_user`
+-- -----------------------------
+DROP TABLE IF EXISTS `iycms_user`;
+CREATE TABLE `iycms_user` (
+  `uid` int(11) NOT NULL AUTO_INCREMENT,
+  `qq` int(11) DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `pic` varchar(255) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`uid`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='用户表';
+
+-- -----------------------------
+-- 表数据  `iycms_user` 共6条
+-- -----------------------------
+INSERT INTO `iycms_user` VALUES ('3','839024615','あ读鈊茚ケ','http://user.qzone.qq.com/839024615','http://qlogo.store.qq.com/qzone/839024615/839024615/100','839024615@qq.com','1524811909');
+INSERT INTO `iycms_user` VALUES ('4','1270127079','あ奪芯決ケ','http://user.qzone.qq.com/1270127079','http://qlogo.store.qq.com/qzone/1270127079/1270127079/100','1270127079@qq.com','1524812272');
+INSERT INTO `iycms_user` VALUES ('5','12345670','闪靓段子','http://user.qzone.qq.com/12345670','http://qlogo.store.qq.com/qzone/12345670/12345670/100','12345670@qq.com','1524813161');
+INSERT INTO `iycms_user` VALUES ('6','12345','一块乐','http://user.qzone.qq.com/12345','http://qlogo.store.qq.com/qzone/12345/12345/100','12345@qq.com','1524887552');
+INSERT INTO `iycms_user` VALUES ('7','343918431','东东','http://user.qzone.qq.com/343918431','http://qlogo.store.qq.com/qzone/343918431/343918431/100','343918431@qq.com','1524888466');
+INSERT INTO `iycms_user` VALUES ('8','55941677','静&聆¤听@~@','http://user.qzone.qq.com/55941677','http://qlogo.store.qq.com/qzone/55941677/55941677/100','55941677@qq.com','1524889412');
 
 -- -----------------------------
 -- 数据库由iycms博客管理系统备份

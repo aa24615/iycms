@@ -7,7 +7,7 @@ class Leave extends Common {
         $Info = new \ClientInfo();
         $db = db("leave");
         $data['content'] = input("post.content") ? : $this->error("留言内容不能为空");
-        $data['pid'] = input("post.id",0);
+        $data['pid'] = input("post.pid",0);
         $data['qq'] = input("post.qq",0);
         $data['time'] = time();
         $data['ip'] = $this->req->ip();
@@ -22,14 +22,26 @@ class Leave extends Common {
             $this->error("失败");
         }
     }
-
+    //查顶级
     public function index(){
         $p = input("param.p",1);
         $db = db("leave");
         $where['pid'] = 0;
         $data['count'] = $db->where($where)->count();
         $list = $db->where($where)->order("time desc")->page($p,10)->select();
-        $i=0;
+        $data['list']= $this->getList($list) ? : [];
+        return json($data);
+    }
+    //查子级
+    private function reply($id){
+        $db = db("leave");
+        $where['pid'] = $id;
+        $list = $db->where($where)->order("time desc")->limit(100)->select();
+        return $this->getList($list) ? : [];
+    }
+    //处理列表中的数据
+    private function getList($list){
+        $i = 0;
         $user = db("user");
         foreach ($list as $v){
             $F = $user->where("qq",$v['qq'])->find();
@@ -37,13 +49,11 @@ class Leave extends Common {
             $list[$i]['name'] = $F['name'] ? : "匿名";
             $list[$i]['region'] = trim( $list[$i]['region']);
             $list[$i]['head'] = $F['pic'] ? $this->host.url('getHead?qq='.$v['qq']) : $this->host."/static/common/image/head.jpg";
+            $list[$i]['list'] = $this->reply($v['id']);
+            $list[$i]['url'] = $F['url'];
             $i++;
         }
-        $data['list']= $list;
-        return json($data);
-    }
-    public function reply($id){
-
+        return $list;
     }
     public function getHead(){
         header('Content-type: image/png');
