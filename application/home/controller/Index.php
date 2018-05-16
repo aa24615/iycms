@@ -4,6 +4,9 @@ use think\Controller;
 class Index extends Controller{
     public function index(){
     	//$this->redirect('/admin');
-    	return view();
+        $a=@(1+2+'A+3');
+        echo $a;
+        //return view();
     }
+
 }
