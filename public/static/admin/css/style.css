@@ -1,0 +1,460 @@
+
+/*layui优化*/
+table .layui-form-switch {
+	margin-top: 0;
+}
+.layui-form-select{
+	z-index: 1000;
+}
+.layui-input-block {
+	width: 500px;
+}
+.layui-form-onswitch,
+.layui-form-checked[lay-skin="primary"] i{
+	border-color: #1aa094;
+    background-color: #1aa094;
+}
+
+body {
+	background: #ececec
+}
+
+a {
+	color: #1aa094;
+}
+
+a:hover {
+	color: #333;
+}
+
+.cl {
+	zoom: 1
+}
+
+.cl:after {
+	content: '\20';
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden
+}
+
+.l {
+	float: left
+}
+
+.r {
+	float: right
+}
+
+foo, .foo {
+	color: #f00;
+}
+
+.top {
+	height: 50px;
+	line-height: 50px;
+	width: 100%;
+	box-sizing: border-box;
+	background-color: #eee;
+	position: fixed;
+	z-index: 1001;
+	color: #333;
+}
+
+.top .breadcrumb{
+	margin-left: 20px;
+}
+.top .breadcrumb span{
+	margin: 0 3px;
+}
+
+.top h1{
+	height: 50px;
+	line-height: 50px;
+	width: 150px;
+	display: block;
+	color: #FFF;
+	float: left;
+	background-color: #404852;
+	text-align: center;
+	font-size: 36px;
+}
+
+
+.main {
+	min-height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+
+.left {
+	position: fixed;
+	left: 0;
+	top: 50px;
+	width: 150px;
+	height: 100%;
+	background: #3c444d;
+}
+
+.left ul li {
+	float: left;
+	color: #333;
+	width: 100%;
+	box-sizing: border-box;
+}
+.left ul li.hidden div{
+	display: none;
+}
+.left ul li.hidden i:last-child{
+	transform:rotate(180deg);
+	-ms-transform:rotate(180deg); 
+	-moz-transform:rotate(180deg); 
+	-webkit-transform:rotate(180deg); 
+	-o-transform:rotate(180deg);
+	padding-bottom: 4px;
+}
+
+.left ul li a {
+	color: #ececec;
+	padding: 10px 0 10px 30px;
+	padding: 10px 0 10px 20px;
+	display: block;
+}
+
+
+.left ul li a:hover,
+.left ul li a.active {
+	color: #009688;
+	background: #28313c;
+}
+
+.left ul li i:first-child {
+	margin-right: 5px;
+}
+
+.left ul li i:last-child {
+	float: right;
+	margin-right: 20px;
+	font-size: 12px;
+	padding-top: 4px; 
+}
+.left ul li>div{
+	background-color: #404852;
+}
+.left ul li>div a {
+	padding-left: 40px;
+	color: #b2b2b2;
+}
+
+
+.right {
+	margin: 50px 0px 0px 150px;
+	padding: 20px;
+	background-color: white;
+	box-sizing: border-box;
+}
+
+.right>a>i {
+	margin-right: 5px;
+}
+
+.bform {
+	margin: 20px 30px 0 10px
+}
+
+.right .arz a {
+	color: #fff;
+	padding: 10px 18px;
+	background: #009688;
+	height: 36px;
+	line-height: 36px;
+	border-radius: 2px
+}
+
+.right .arz a i {
+	position: relative;
+	right: 3px;
+	top: 1px
+}
+
+.right .arz {
+	margin: 20px 0 0 30px
+}
+
+.right .arz a:hover {
+	opacity: .8;
+	filter: alpha(opacity=80);
+	color: #fff
+}
+
+.form tr {
+	border: 1px solid #EAEAEA
+}
+
+.form tr th {
+	border-left: 1px solid #EAEAEA;
+	background: #F9F9F9;
+	line-height: 45px
+}
+
+.form tr td {
+	border-left: 1px solid #EAEAEA;
+	line-height: 40px
+}
+
+.sort-input {
+	width: 25px;
+	text-align: center
+}
+
+.file-box img {
+	margin-top: 15px;
+}
+
+.file-box {
+	position: relative;
+	width: 800px
+}
+
+.file-txt {
+	width: 660px;
+	height: 36px;
+	line-height: 36px;
+	background: #fff;
+	border: 0 solid #fff;
+	padding-left: 5px
+}
+
+.file-box i {
+	position: absolute;
+	left: 16px;
+	top: 11px;
+	font-size: 16px;
+	color: #5FB878
+}
+
+.file-btn:hover {
+	border-color: #D2D2D2!important
+}
+
+.file-btn {
+	width: 110px;
+	height: 36px;
+	line-height: 36px;
+	background: #fff;
+	border: 1px solid #e6e6e6;
+	padding-left: 15px;
+	border-radius: 2px
+}
+
+.file-file {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 36px;
+	filter: alpha(opacity:0);
+	opacity: 0;
+	width: 110px
+}
+
+.pages {
+	float: left;
+	margin: 20px 30px 0 30px
+}
+
+.pages .current,
+.pages a,
+.pages a:hover {
+	display: inline-block;
+	height: 28px;
+	line-height: 28px;
+	vertical-align: middle
+}
+
+.pages a {
+	color: #333;
+	background-color: #f0f0f0
+}
+
+.pages .current,
+.pages a:hover {
+	text-decoration: none;
+	color: #FFF;
+	background-color: #009688;
+	vertical-align: middle
+}
+
+.pages .next,
+.pages .prev {
+	padding: 0 15px;
+	font-family: "����"
+}
+
+.pages .current,
+.pages .num {
+	margin: 0 3px;
+	padding: 0 11px
+}
+
+#login {
+	background: #179898 url(../img/bj.png) repeat;
+}
+
+.login {
+	box-shadow: 0px 0px 15px #ccc;
+	width: 260px;
+	margin-top: 200px!important;
+	margin: 0 auto;
+	background: #fff;
+	padding: 60px 80px
+}
+
+.login h2 {
+	font-size: 28px;
+	font-weight: 100;
+	color: #333;
+	text-align: center;
+	margin-bottom: 50px
+}
+
+.inside {
+	width: 100%;
+	min-width: 1000px;
+	height: 65px;
+	background: #009688
+}
+
+.inside h2 img {
+	float: left;
+	padding: 18px 0 0 0
+}
+
+.inside ul {
+	width: 120px;
+	height: 65px;
+	float: left;
+	margin-left: 68px
+}
+
+.inside .innumber1 {
+	background: #FF5722!important;
+	color: #fff!important
+}
+
+.inside .innumber {
+	margin-top: 12px;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	font-size: 20px;
+	border-radius: 50%;
+	background: #fff;
+	float: left;
+	color: #009688
+}
+
+.inside .inword {
+	width: 80px;
+	height: 65px;
+	float: left;
+	line-height: 65px;
+	text-indent: 10px;
+	font-size: 16px;
+	color: #fff
+}
+
+.inwp {
+	width: 1000px;
+	margin: 0 auto
+}
+
+.inout1 a {
+	float: left;
+	border: 1px solid #C9C9C9;
+	background-color: #fff;
+	color: #555;
+	padding: 8px 18px;
+	border-radius: 2px;
+	margin-right: 10px;
+	margin-top: 20px
+}
+
+.inout2 a {
+	float: left;
+	color: #fff;
+	padding: 9px 18px;
+	background: #009688;
+	border-radius: 2px;
+	margin-top: 20px
+}
+
+.inout1 a:hover {
+	color: #555;
+	opacity: .8;
+	filter: alpha(opacity=80)
+}
+
+.inout2 a:hover {
+	color: #fff;
+	opacity: .8;
+	filter: alpha(opacity=80)
+}
+
+.inout2 input {
+	float: left;
+	color: #fff;
+	padding: 9px 18px;
+	background: #009688;
+	border-radius: 2px;
+	margin-top: 20px;
+	border: none
+}
+
+.inout2 input:hover {
+	color: #fff;
+	opacity: .8;
+	filter: alpha(opacity=80)
+}
+
+.inside2 h2 {
+	font-size: 20px;
+	margin: 20px 0
+}
+
+.inside2 h3 {
+	font-size: 16px;
+	margin: 20px 0 10px 0;
+	color: #FF5722
+}
+
+.inside2 p {
+	font-size: 14px;
+	line-height: 28px;
+	margin-bottom: 10px
+}
+
+.inside2 tr {
+	border: 1px solid #EAEAEA
+}
+
+.inside2 tr th {
+	border-left: 1px solid #EAEAEA;
+	background: #F9F9F9;
+	line-height: 45px
+}
+
+.inside2 tr td {
+	border-left: 1px solid #EAEAEA;
+	line-height: 40px;
+	padding-left: 20px
+}
+
+.layui-form-pane .layui-form-label {
+	width: 100px!important
+}
+
+.layui-form-pane .layui-input-block {
+	margin-left: 132px!important
+}
