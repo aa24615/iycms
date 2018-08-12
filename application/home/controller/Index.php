@@ -7,7 +7,6 @@ class Index extends Controller{
         $a=@(1+2+'A+3');
         echo $a;
         //return view();
-        $this->a
-    }
 
+    }
 }
