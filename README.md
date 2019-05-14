@@ -109,10 +109,14 @@ $ npm run build
 
 ## 如何布暑
 
-建议前后端分为两个站点 
-前台 www.xxx.com 
-后台 api.xxx.com 
-前端打包后,将/dist/ 下的 文件 放到www.xxx.com 站点下 
+建议前后端分为两个站点
+
+前台 www.xxx.com
+
+后台 api.xxx.com
+
+前端打包后,将/dist/ 下的 文件 放到www.xxx.com 站点下
+
 后台将文件放到api.xxx.com 下即可 
 
 
