@@ -27,7 +27,6 @@ apache or nginx
 /application/database.php 配置数据库
 /public 项目入口
 /backup/* 数据库文件
-
 ```
 apache 无须配置伪静态   
 推荐使用[宝塔](http://www.bt.cn/)主机面板 or [AMH](https://amh.sh/index.htm?amh)主机面板
