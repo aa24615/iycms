@@ -1,6 +1,12 @@
-# IYCMS 博客管理系统 [前端?](/web/)
-> 专为程序员订制的博客系统 一个全站无刷新的博客    
-> 先睹为快->传送门 [http://blog.php127.com](http://blog.php127.com)
+# IYCMS 博客管理系统
+
+专为程序员订制的博客系统 一个全站无刷新的博客    
+
+先睹为快->传送门 [blog.php127.com](http://blog.php127.com/)
+
+
+
+
 
 
 ## 后台说明
@@ -9,9 +15,11 @@
 
 ### 运行环境
 
-> php5.4 以上版本  
-> mysql 5.5 以上版本 且打开 InnoDB 引擎  
-> apache or nginx 
+php5.4 以上版本
+
+mysql 5.5 以上版本 且打开 InnoDB 引擎
+
+apache or nginx 
 
 ### 配置&安装 
 
@@ -21,12 +29,12 @@
 /backup/* 数据库文件
 
 ```
-> apache 无须配置伪静态   
-> 推荐使用[宝塔](http://www.bt.cn/)主机面板 or [AMH](https://amh.sh/index.htm?amh)主机面板
+apache 无须配置伪静态   
+推荐使用[宝塔](http://www.bt.cn/)主机面板 or [AMH](https://amh.sh/index.htm?amh)主机面板
 
 大部分环境不支持直接绑定到public 目录 须要手工修改指定
 
-> nginx 伪静态规则
+nginx 伪静态规则
 
 ``` nginx
 location / {
@@ -37,7 +45,11 @@ location / {
 ```
 后台 /admin/login/index.html 用户名 admin 密码 admin
 
-> 其他事项(暂无) 请参考[ThinkPHP5.0手册](https://www.kancloud.cn/manual/thinkphp5/118003)
+其他事项(暂无) 请参考[ThinkPHP5.0手册](https://www.kancloud.cn/manual/thinkphp5/118003)
+
+
+
+
 
 
 ## 前台说明
@@ -76,8 +88,8 @@ $ npm i
 ```
 ### 如何调试
 
-> 先配置api根地址   
-> 在 [/src/App.vue](src/App.vue) 文件中 内附注释
+先配置api根地址   
+在 [/src/App.vue](src/App.vue) 文件中 内附注释
 
 ``` bash
 $ npm run dev
@@ -98,14 +110,18 @@ $ npm run build
 ## 如何布暑
 
 建议前后端分为两个站点
+
 前台 www.xxx.com
+
 后台 api.xxx.com
 
-> 前端打包后,将/dist/ 下的 文件 放到www.xxx.com 站点下
-> 后台将文件放到api.xxx.com 下即可
+前端打包后,将/dist/ 下的 文件 放到www.xxx.com 站点下
+
+后台将文件放到api.xxx.com 下即可
 
 
 ### 如有问题请联系我们
+
 - QQ群: [324098841](http://shang.qq.com/wpa/qunwpa?idkey=6f5462146888da75feaaa1fe1ab3addfcea63f6454548238033c6a91fa610e4e)      
 - QQ号: [839024615](http://wpa.qq.com/msgrd?v=3&uin=839024615&site=qq&menu=yes) 
 
