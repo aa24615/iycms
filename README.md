@@ -28,6 +28,10 @@ apache or nginx
 /public 项目入口
 /backup/* 数据库文件
 ```
+使用composer安装所有依赖包
+```
+$ composer install
+```
 apache 无须配置伪静态   
 推荐使用[宝塔](http://www.bt.cn/)主机面板 or [AMH](https://amh.sh/index.htm?amh)主机面板
 
@@ -62,11 +66,9 @@ location / {
 /src
 /static
 /index.html
-
 ```
 
 ### 开发前请安装node.js 并运行以下命令安装vue以及依赖
-
 
 ``` bash
 $ npm i vue -g
@@ -97,7 +99,6 @@ $ npm run dev
 ### 如何编译
 
 ``` bash
-
 $ npm run build
 # 编译后,文件会存放到 /dist/下
 ```
