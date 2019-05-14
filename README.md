@@ -110,13 +110,9 @@ $ npm run build
 ## 如何布暑
 
 建议前后端分为两个站点
-
 前台 www.xxx.com
-
 后台 api.xxx.com
-
 前端打包后,将/dist/ 下的 文件 放到www.xxx.com 站点下
-
 后台将文件放到api.xxx.com 下即可
 
 
@@ -125,6 +121,6 @@ $ npm run build
 - QQ群: [324098841](http://shang.qq.com/wpa/qunwpa?idkey=6f5462146888da75feaaa1fe1ab3addfcea63f6454548238033c6a91fa610e4e)      
 - QQ号: [839024615](http://wpa.qq.com/msgrd?v=3&uin=839024615&site=qq&menu=yes) 
 
-- 博客: [blog.php127.com] (http://blog.php127.com)
+- 博客: [blog.php127.com](http://blog.php127.com)
 
 
