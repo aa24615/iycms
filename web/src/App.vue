@@ -34,9 +34,9 @@
 	export default {
 		data() {
 			return {
-				host: "http://www.blog.com", //api接口
+				host: "http://blog.php.com", //api接口
 				show: false, //显示页面
-        loading:"数据加载中...",
+        		loading:"数据加载中...",
 				ShowHeader: false, //导航切换
 				top: false, //返回顶部
 				init:{},

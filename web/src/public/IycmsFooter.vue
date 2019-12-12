@@ -31,7 +31,7 @@
 			<div class="copyright">
 				<div class="l">
 					<span v-html="init.web.powerby"></span>
-					<a href="http://www.miitbeian.gov.cn/" target="_blank">{{init.web.beian}}</a></div>
+					<a href="http://www.beian.miit.gov.cn/" target="_blank">{{init.web.beian}}</a></div>
 				<div class="r">
 					<i class="iconfont">&#xe654;</i>
 					<a :href="'http://wpa.qq.com/msgrd?v=3&uin='+init.info.qq+'&site=qq&menu=yes'" target="_blank"><i class="iconfont">&#xe63c;</i></a>
