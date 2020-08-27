@@ -93,7 +93,7 @@
       if(document.domain=="127.0.0.1" || document.domain=="www.blog.com"){ //webpack环境下
         this.host = "http://www.blog.com";
       }else{
-        this.host = "http://blog.php127.com"; //正式上线
+        this.host = "http://api.blog.php127.com"; //正式上线
       }
 
 			if(sessionStorage.init){
