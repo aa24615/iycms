@@ -14,7 +14,7 @@ class Article extends Common {
         }
       
         $count = $db->where($where)->count();
-        $list = $db->where($where)->order("top desc,id desc")->page($p,10)->select();
+        $list = $db->where($where)->field('body',true)->order("top desc,id desc")->page($p,10)->select();
        
         for($i=0;$i<count($list);$i++){
             $list[$i]['pic'] = $this->host.$list[$i]['pic'];
